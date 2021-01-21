@@ -1,5 +1,5 @@
 <template>
-    <div v-title data-title="Lyu博客">
+    <div v-title data-title="若水三千博客">
         <Header @child-even="parentEven" @child-evenTitle="parentEvenTitle"></Header>
         <article>
             <div class="lbox">

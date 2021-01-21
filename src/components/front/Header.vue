@@ -5,7 +5,7 @@
         <header id="header">
             <div class="navbox">
                 <h2 id="mnavh" ><span class="navicon"></span></h2>
-                <div class="logo"><a href="/">Lyu个人博客</a></div>
+                <div class="logo"><a href="/">若水三千博客</a></div>
                 <nav>
                     <ul id="starlist">
                         <li><a href="/">首页</a></li>
@@ -19,7 +19,7 @@
                                     <router-link v-else :to='"/list/"+sub.id'>{{sub.name}}</router-link></li>
                             </ul>
                         </li>
-                        <li ><router-link to="/user" target="_blank">后台管理</router-link></li>
+<!--                        <li ><router-link to="/user" target="_blank">后台管理</router-link></li>-->
                     </ul>
                 </nav>
                 <div class="searchico"></div>
@@ -28,9 +28,9 @@
         <div class="searchbox">
             <div class="search">
                 <div>
-                    <el-form :inline="true" ref="queryForm" :model="queryForm" label-width="80px">
+                    <el-form :inline="true" ref="queryForm" :model="pageParam" label-width="80px">
                         <el-form-item>
-                            <el-input v-model="queryForm.title" style="width: 330px" placeholder="按标题查询"></el-input>
+                            <el-input v-model="pageParam.data.title" style="width: 330px" placeholder="按标题查询"></el-input>
                         </el-form-item>
                         <el-form-item>
                             <a href="#content"  name="search">
@@ -65,6 +65,15 @@
                 },
                 articles:[],
                 pageNo :1,
+              pageParam:{
+                data:{
+                  title: ''
+                },
+                limit: 0,
+                offset: 0,
+                pageNo: 0,
+                pageSize: 0
+              },
             }
         },
         mounted() {
@@ -89,17 +98,18 @@
         },
         methods:{
             search(){
-                let  param =this.queryForm
+                let  param =this.pageParam
                 this.pageNo =1
-                param.page=this.pageNo
+                param.pageNo=this.pageNo
+
                 this.list(param)
             },
             list(param){
-                search(param).then(data=>{
-                    this.articles=data
+                search(param).then(reponse=>{
+                    this.articles=reponse.data.records
                     this.$emit('child-even',this.articles)
-                    this.$emit('child-evenTitle',this.queryForm.title)
-                    this.total=data.total
+                    this.$emit('child-evenTitle',this.pageParam.title)
+                    this.pageParam.total=reponse.data.total
                 }).catch(error=>{
                     this.$message.error(error)
                 })

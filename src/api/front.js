@@ -10,20 +10,20 @@ export function get(id) {
     return axiosInstall.get('front/channel/get?id='+id,)
 }
 
-export function getNew() {
-    return axiosInstall.get('front/article/getByChannelId');
+// export function getNew() {
+//     return axiosInstall.get('front/article/getByChannelId');
+// }
+
+
+export function getPageList(pageParam) {
+    return axiosInstall.post('front/article/getByChannelId',pageParam);
 }
 
 
-export function getPageList(page) {
-    return axiosInstall.get('front/article/getByChannelId?page='+page);
-}
 
-
-
-export function getTop(channelId, top) {
-    return axiosInstall.get('front/article/getByChannelId?channelId='+channelId+'&limit='+top);
-}
+// export function getTop(channelId, top) {
+//     return axiosInstall.get('front/article/getByChannelId?channelId='+channelId+'&limit='+top);
+// }
 
 
 
@@ -69,9 +69,12 @@ export function getRandomArticle() {
     return axiosInstall.get('front/article/getRandomArticle')
 }
 
-
 //搜索
 
 export function search(article) {
     return axiosInstall.post('front/article/search',article)
+}
+
+export function getCarousel(){
+    return axiosInstall.get("front/article/getcarousel")
 }

@@ -12,9 +12,9 @@
                     </router-link>
                 </span>
                 <p class="blogtext">{{item.summary}} </p>
-                <p class="bloginfo">
+<!--                <p class="bloginfo">
                     <i class="avatar"><img :src="item.user.avatar"></i>
-                    <span>{{item.user.nickName}}</span><span>{{item.createDate}}</span></p>
+                    <span>{{item.user.nickName}}</span><span>{{item.createDate}}</span></p>-->
                 <router-link :to='"/detail/"+item.id'  class="viewmore"> 阅读更多</router-link >
             </li>
 
@@ -28,9 +28,9 @@
                     </router-link>
                 </span>
                 <p class="blogtext">{{item.summary}} </p>
-                <p class="bloginfo">
+<!--                <p class="bloginfo">
                     <i class="avatar"><img :src="item.user.avatar"></i>
-                    <span>{{item.user.nickName}}</span><span>{{item.createDate}}</span></p>
+                    <span>{{item.user.nickName}}</span><span>{{item.createDate}}</span></p>-->
                 <router-link :to='"/detail/"+item.id'  class="viewmore"> 阅读更多</router-link >
             </li>
         </ul>
@@ -86,8 +86,8 @@
             },
             list(parms){
                 getChannelArticle(parms).then(data=>{
-                    this.articles=data.list
-                    this.total=data.total
+                    this.articles=data.data.records
+                    this.total=data.data.total
                 }).catch(error=>{
                     this.$message.error(error)
                 })

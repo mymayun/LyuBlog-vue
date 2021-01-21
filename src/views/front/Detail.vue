@@ -6,7 +6,10 @@
                 <div class="content_box whitebg">
                     <h2 class="htitle"><span class="con_nav">您现在的位置是：<a href="/">首页</a>&gt;<a href="/">{{articles.title}}</a></span>正文</h2>
                     <h1 class="con_tilte">{{articles.title}}</h1>
-                    <p class="bloginfo"><i class="avatar"><img :src="user.avatar"></i><span>{{user.nickName}}</span><span>{{articles.createDate}}</span><span>{{articles.articleView}}人已观看</span></p>
+                    <p class="bloginfo">
+<!--                    <i class="avatar">  <img :src="user.avatar"></i>-->
+<!--                      <span></span>-->
+                      <span>{{articles.createTime}}</span><span>{{articles.articleView}}人已观看</span></p>
                     <p class="con_info"><b>摘要</b>{{articles.summary}}</p>
                     <div class="con_text">
                         <v-md-preview :text="articles.content"></v-md-preview>
@@ -111,7 +114,8 @@
             getArticle(to.params.id).then(data=>{
                 if(data){
                     this.articles =data.data
-                    this.user=data.data.user
+                  console.log(this.articles)
+                    this.user=data.data.createUser
                 }
             })
             this.xx = false;
@@ -122,8 +126,22 @@
         },
         methods:{
 
-        }
+        },
+
+      // 将时间戳转日期格式的过滤器
+      formatStartTime(row, column) {
+        const value = row.createTime
+        var year = value.substr(0, 4)
+        var month = value.substr(4, 2)
+        var day = value.substr(6, 2)
+        var hour = value.substr(8, 2)
+        var minute = value.substr(10, 2)
+        var second = value.substr(12, 2)
+        return year + '-' + month + '-' + day + ' ' + ' ' + hour + ':' + minute + ':' + second
+      },
     }
+
+
 </script>
 
 <style scoped>

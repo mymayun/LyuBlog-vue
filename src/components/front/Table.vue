@@ -62,7 +62,6 @@
                 this.cur=id
                 getChannelArticlePos(id).then(data=>{
                     this.articles=data.data
-
                     if (data.data[0]==null){
                         this.xxxx.id=0
                         this.xxxx.title=''
